@@ -33,6 +33,7 @@ function output() {
 
 function won(player) {
 	winner = player;
+	output();
 	console.log(`And the win goes to: ${player}!\n`);
 }
 
