@@ -29,7 +29,6 @@ resetState();
 function output() {
   for (let y = height - 1; y >= 0; --y) {
     for (let x = 0; x < width; ++x) {
-      //process.stdout.write(`(${x},${y})`); // for debugging
       process.stdout.write(board[x][y]);
     }
     console.log();
