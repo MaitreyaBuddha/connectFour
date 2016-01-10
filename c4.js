@@ -65,7 +65,27 @@ function isWin(player, x, y) {
 	} else if (right && isPlayer(player, x + 2, y)) {
 		return true;
 	}
-	return false;
+
+	// Check /
+	let bottomLeft = isPlayer(player, x - 1, y - 1);
+	let topRight = isPlayer(player, x + 1, y + 1);
+	if (bottomLeft) {
+		console.log(bottomLeft);
+		if (isPlayer(player, x - 2, y - 2) || topRight) {
+			return true;
+		}
+	} else if (topRight && isPlayer(player, x + 2, y + 2)) {
+		return true;
+	}
+
+	// Check \
+	let topLeft = isPlayer(player, x - 1, y + 1);
+	let bottomRight = isPlayer(player, x + 1, y - 1);
+	if (topLeft) {
+		return isPlayer(player, x - 2, y + 2) || bottomRight;
+	} else {
+		return bottomRight && isPlayer(player, x + 2, y - 2);
+	}
 }
 
 function play(player, x) {
@@ -86,6 +106,7 @@ function assertWon(player) {
 	const assert = require('assert');
 	assert(winner === player, `Winner ${winner} != ${player}`)
 }
+
 play(red, 1);
 play(red, 1);
 play(black, 1);
@@ -109,5 +130,28 @@ assertWon(empty);
 play(red, 0);
 assertWon(red);	// horozontal
 
+resetState();
+play(red, 1);
+play(red, 2);
+play(black, 3);
+play(red, 3);
+play(black, 4);
+play(black, 4);
+assertWon(empty);
+play(red, 4);
+assertWon(red);	// Win like /
+
+resetState();
+play(red, 1);
+play(black, 2);
+play(black, 3);
+play(red, 3);
+play(red, 4);
+play(black, 4);
+assertWon(empty);
+play(red, 5);
+play(red, 5);
+play(black, 5);
+assertWon(black);	// Win like \
 
 
