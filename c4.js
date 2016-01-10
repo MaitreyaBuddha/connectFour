@@ -12,8 +12,13 @@ let column = [empty,empty,empty,empty,empty,];
 function makeBoard() {
 	return [column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),];	
 }
-let board = makeBoard();
+let board;
 let winner;
+function resetState() {
+	board = makeBoard();
+	winner = empty;
+}
+resetState();
 
 function output() {
 	for (let y = height - 1; y >= 0; --y) {
@@ -84,9 +89,9 @@ play(black, 1);
 play(red, 1);
 play(red, 1);
 play(red, 1);
-assertWon();	// No one won
+assertWon(empty);	// No one won
 
-board = makeBoard();
+resetState();
 play(red, 1);
 play(red, 2);
 play(black, 3);
