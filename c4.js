@@ -19,6 +19,24 @@ function output() {
 		}
 		console.log();
 	}
+	console.log('\n');
 }
 
-output()
+function play(player, x) {
+	let column = board[x];
+	for (let y = 0; y < height; ++y) {
+		if (column[y] !== empty) {
+			continue;
+		}
+		column[y] = player;
+		return output();
+	}
+	console.error('Invalid move, column is full');
+}
+
+play(red, 1);
+play(red, 1);
+play(red, 1);
+play(red, 1);
+play(red, 1);
+play(red, 1);
