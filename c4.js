@@ -5,12 +5,18 @@ let empty = '*';
 let red = '#';
 let black = 'O';
 
-// TODO make this easily scalable
 let height = 5;
 let width = 7;
-let column = [empty,empty,empty,empty,empty,];
+let column = [];
+for (let i = 0; i < height; ++i) {
+	column.push(empty);
+}
 function makeBoard() {
-	return [column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),];	
+	let ret= [];
+	for (let i = 0; i < width; ++i) {
+		ret.push(column.slice(0));
+	}
+	return ret;
 }
 let board;
 let winner;
