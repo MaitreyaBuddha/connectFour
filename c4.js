@@ -1,23 +1,27 @@
+/**
+ * Connect 4 simple functionality programming test
+ *
+ */
 
 'use strict';
 
 let empty = '*';
 let red = '#';
 let black = 'O';
-
 let height = 5;
 let width = 7;
-let column = [];
-for (let i = 0; i < height; ++i) {
-  column.push(empty);
-}
 function makeBoard() {
   let ret= [];
+  let column = [];
+  for (let i = 0; i < height; ++i) {
+    column.push(empty);
+  }
   for (let i = 0; i < width; ++i) {
     ret.push(column.slice(0));
   }
   return ret;
 }
+
 let board;
 let winner;
 function resetState() {
