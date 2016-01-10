@@ -13,6 +13,7 @@ function makeBoard() {
 	return [column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),];	
 }
 let board = makeBoard();
+let winner;
 
 function output() {
 	for (let y = height - 1; y >= 0; --y) {
@@ -26,6 +27,7 @@ function output() {
 }
 
 function won(player) {
+	winner = player;
 	console.log(`And the win goes to: ${player}!\n`);
 }
 
@@ -71,20 +73,23 @@ function play(player, x) {
 }
 
 
+// Test stuff
+function assertWon(player) {
+	const assert = require('assert');
+	assert(winner === player, `Winner ${winner} != ${player}`)
+}
 play(red, 1);
 play(red, 1);
 play(black, 1);
 play(red, 1);
 play(red, 1);
 play(red, 1);
+assertWon();	// No one won
 
 board = makeBoard();
-
 play(red, 1);
 play(red, 2);
 play(black, 3);
 play(red, 0);
 play(red, 3);
-play(red, 1);
-play(red, 1);
-play(red, 1);
+assertWon(red);
