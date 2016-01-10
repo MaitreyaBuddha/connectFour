@@ -58,9 +58,11 @@ function isWin(player, x, y) {
 	let left = isPlayer(player, x - 1, y);
 	let right = isPlayer(player, x + 1, y);
 	if (left) {
-		return isPlayer(player, x - 2, y) || right;
-	} else {
-		return right && isPlayer(player, x + 2, y);
+		if (isPlayer(player, x - 2, y) || right) {
+			return true;
+		}
+	} else if (right && isPlayer(player, x + 2, y)) {
+		return true;
 	}
 	return false;
 }
