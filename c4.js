@@ -9,7 +9,10 @@ let black = 'O';
 let height = 5;
 let width = 7;
 let column = [empty,empty,empty,empty,empty,];
-let board = [column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),]
+function makeBoard() {
+	return [column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),column.slice(0),];	
+}
+let board = makeBoard();
 
 function output() {
 	for (let y = height - 1; y >= 0; --y) {
@@ -22,6 +25,21 @@ function output() {
 	console.log('\n');
 }
 
+function won(player) {
+	console.log(`And the win goes to: ${player}!\n`);
+}
+
+// Check only from new input
+function isWin(player, x, y) {
+	// Check column
+	let column = board[x];
+	if (column[y - 1] === player &&
+		column[y - 2] === player) {
+		return true;
+	}
+	return false;
+}
+
 function play(player, x) {
 	let column = board[x];
 	for (let y = 0; y < height; ++y) {
@@ -29,10 +47,20 @@ function play(player, x) {
 			continue;
 		}
 		column[y] = player;
-		return output();
+		return isWin(player, x, y) ? won(player) : output();
 	}
 	console.error('Invalid move, column is full');
 }
+
+
+play(red, 1);
+play(red, 1);
+play(black, 1);
+play(red, 1);
+play(red, 1);
+play(red, 1);
+
+board = makeBoard();
 
 play(red, 1);
 play(red, 1);
