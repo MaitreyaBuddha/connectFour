@@ -96,8 +96,18 @@ assertWon(empty);	// No one won
 
 resetState();
 play(red, 1);
+play(red, 1);
+assertWon(empty);
+play(red, 1);
+assertWon(red);	// vertical
+
+resetState();
+play(red, 1);
 play(red, 2);
 play(black, 3);
+assertWon(empty);
 play(red, 0);
-play(red, 3);
-assertWon(red);
+assertWon(red);	// horozontal
+
+
+
