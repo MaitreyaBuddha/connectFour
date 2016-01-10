@@ -29,6 +29,15 @@ function won(player) {
 	console.log(`And the win goes to: ${player}!\n`);
 }
 
+// Less typing and automatic logical scoping
+function isPlayer(player, x, y) {
+	// False if we reference undefined
+	if (void 0 === board[x]) {
+		return false;
+	}
+	return board[x][y] === player;
+}
+
 // Check only from new input
 function isWin(player, x, y) {
 	// Check column
@@ -36,6 +45,15 @@ function isWin(player, x, y) {
 	if (column[y - 1] === player &&
 		column[y - 2] === player) {
 		return true;
+	}
+
+	// Check row
+	let left = isPlayer(player, x - 1, y);
+	let right = isPlayer(player, x + 1, y);
+	if (left) {
+		return isPlayer(player, x - 2, y) || right;
+	} else {
+		return right && isPlayer(player, x + 2, y);
 	}
 	return false;
 }
@@ -63,8 +81,10 @@ play(red, 1);
 board = makeBoard();
 
 play(red, 1);
-play(red, 1);
-play(red, 1);
+play(red, 2);
+play(black, 3);
+play(red, 0);
+play(red, 3);
 play(red, 1);
 play(red, 1);
 play(red, 1);
