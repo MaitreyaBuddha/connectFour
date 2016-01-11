@@ -1,0 +1,15 @@
+{
+  "name": "c4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "c4.js",
+  "dependencies": {
+    "readline-sync": "^1.2.22"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "./c5.js test"
+  },
+  "author": "Kelly",
+  "license": "CC-BY-NC-SA-4.0"
+}

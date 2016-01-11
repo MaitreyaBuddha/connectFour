@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * Connect 4 simple functionality programming test
  *
@@ -116,51 +117,72 @@ function assertWon(player) {
   assert(winner === player, `Winner ${winner} != ${player}`)
 }
 
-play(red, 1);
-play(red, 1);
-play(black, 1);
-play(red, 1);
-play(red, 1);
-play(red, 1);
-assertWon(empty); // No one won
+if (process.argv[2] === 'test') {
+  play(red, 1);
+  play(red, 1);
+  play(black, 1);
+  play(red, 1);
+  play(red, 1);
+  play(red, 1);
+  assertWon(empty); // No one won
 
-resetState();
-play(red, 1);
-play(red, 1);
-assertWon(empty);
-play(red, 1);
-assertWon(red); // vertical
+  resetState();
+  play(red, 1);
+  play(red, 1);
+  assertWon(empty);
+  play(red, 1);
+  assertWon(red); // vertical
 
-resetState();
-play(red, 1);
-play(red, 2);
-play(black, 3);
-assertWon(empty);
-play(red, 0);
-assertWon(red); // horozontal
+  resetState();
+  play(red, 1);
+  play(red, 2);
+  play(black, 3);
+  assertWon(empty);
+  play(red, 0);
+  assertWon(red); // horozontal
 
-resetState();
-play(red, 1);
-play(red, 2);
-play(black, 3);
-play(red, 3);
-play(black, 4);
-play(black, 4);
-assertWon(empty);
-play(red, 4);
-assertWon(red); // Win like /
+  resetState();
+  play(red, 1);
+  play(red, 2);
+  play(black, 3);
+  play(red, 3);
+  play(black, 4);
+  play(black, 4);
+  assertWon(empty);
+  play(red, 4);
+  assertWon(red); // Win like /
 
-resetState();
-play(red, 1);
-play(black, 2);
-play(black, 3);
-play(red, 3);
-play(red, 4);
-play(black, 4);
-assertWon(empty);
-play(red, 5);
-play(red, 5);
-play(black, 5);
-assertWon(black); // Win like \
+  resetState();
+  play(red, 1);
+  play(black, 2);
+  play(black, 3);
+  play(red, 3);
+  play(red, 4);
+  play(black, 4);
+  assertWon(empty);
+  play(red, 5);
+  play(red, 5);
+  play(black, 5);
+  assertWon(black); // Win like \
+} else {
+  let readlineSync = require('readline-sync');
 
+  let player = red;
+  output();
+  while (winner === empty) {
+    let choice = readlineSync.questionInt(`Enter row (1-7) for player ${player}: `);
+    if (choice < 1 || choice > 7) {
+      console.log(`Invalid choice ${choice}.`)
+      continue;
+    }
+
+    // grid is 0-based, we are 1-based, because that's easier on a keyboard
+    play(player, choice - 1);
+    if (player === red) {
+      player = black;
+    } else {
+      player = red;
+    }
+  }
+}
 
