@@ -9,7 +9,7 @@
 let empty = '*';
 let red = '#';
 let black = 'O';
-let height = 5;
+let height = 6;
 let width = 7;
 function makeBoard() {
   let ret= [];
